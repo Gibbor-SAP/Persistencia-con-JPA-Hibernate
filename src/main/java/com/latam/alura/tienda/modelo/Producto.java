@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,62 +11,51 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "productos")
-public class Producto {
-	
-//Mapeamiento entre entidades esta relación puede ser entre una entidad y un Enum o entre dos relaciones. 
-	//Para relacionamientos entre entidades y Enum:
-	
+@Table(name="productos")
+public class Producto{
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	
 	private String nombre;
 	private String descripcion;
 	private BigDecimal precio;
-	private LocalDate fechaDeRegistro = LocalDate.now();
-
-//Neva entidad como atributo en la entidad principal con la diferencia que vamos a utilizar la anotación para mapear relaciones de cardinalidad.
+	private LocalDate fechaDeRegistro= LocalDate.now();
+	
 	@ManyToOne
 	private Categoria categoria;
-	
-	public Producto() { // Constructor vacío
-}
 
+	
+	public Producto() {
+		
+	}
 	public Producto(String nombre, String descripcion, BigDecimal precio, Categoria categoria) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.categoria = categoria;
 	}
-
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 	public BigDecimal getPrecio() {
 		return precio;
 	}
-
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
